@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -7,6 +8,8 @@ public class TickManager : MonoBehaviour
     private float tickInterval;
     public int tickCount;
 
+    public event Action<int> OnTick;
+
     void Start()
     {
         UpdateTickInterval();
@@ -15,7 +18,7 @@ public class TickManager : MonoBehaviour
 
     void UpdateTickInterval()
     {
-        tickInterval = 1f / ticksPerSecond; 
+        tickInterval = 1f / ticksPerSecond;
     }
 
     IEnumerator TickLoop()
@@ -24,7 +27,9 @@ public class TickManager : MonoBehaviour
         {
             yield return new WaitForSeconds(tickInterval);
             tickCount++;
-            Debug.Log($"Tick {tickCount} - Intervalo: {tickInterval} segundos");
+            print($"Tick {tickCount} - Intervalo: {tickInterval} segundos");
+
+            OnTick?.Invoke(tickCount); 
         }
     }
 

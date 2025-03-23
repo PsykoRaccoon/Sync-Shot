@@ -58,6 +58,5 @@ public class TickSpawner : MonoBehaviour
     {
         Vector3 spawnPosition = spawnPoint ? spawnPoint.position : transform.position;
         Instantiate(prefab, spawnPosition, Quaternion.identity);
-        Debug.Log($"Spawned {prefab.name} en tick {lastTick}");
     }
 }
