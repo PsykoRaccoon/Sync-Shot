@@ -17,6 +17,9 @@ public class MenuManager : MonoBehaviour
             case "Credits":
                 cameraMovement.MoveTo("Credits");
                 break;
+                case "Origin":
+                cameraMovement.MoveTo("Origin");
+                break;
             case "Exit":
                 cameraMovement.MoveTo("Exit");
                 break;
