@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3810755576380536194}
   - component: {fileID: 111354756436808692}
   - component: {fileID: 4432981109713699522}
+  - component: {fileID: 5842228899005403197}
   - component: {fileID: 2918462073974371357}
   m_Layer: 0
   m_Name: Cube
@@ -119,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f166d5d51436c704eaa7a10539fe4c09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2918462073974371357
+--- !u!114 &5842228899005403197
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,10 +129,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 1982611249215013606}
   m_Enabled: 1
   m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8fad41773b65ae4c9e8e7fea9a80575, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BPM: 128
+  onVisible: 0
+--- !u!114 &2918462073974371357
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1982611249215013606}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe0c6f8784e3e804bac03982f2421b9f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   BPM: 128
-  visualObject: {fileID: 1982611249215013606}
-  goodHitColor: {r: 0, g: 1, b: 0, a: 1}
-  badHitColor: {r: 1, g: 0, b: 0, a: 1}
