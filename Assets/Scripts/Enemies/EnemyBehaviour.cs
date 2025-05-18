@@ -49,6 +49,26 @@ public class EnemyBehaviour : MonoBehaviour
         lastAttackTime = currentTime;
     }
 
+    public bool canGetAttacked()
+    {
+        float currentTime = Time.time;
+
+        float timeSinceLastAttack = currentTime - lastAttackTime;
+
+        if (timeSinceLastAttack >= timeBetweenAttacks * 0.9f && timeSinceLastAttack <= timeBetweenAttacks * 1.1f)
+        {
+            //ChangeColor(Color.green);
+            return true;
+        }
+        else
+        {
+            ChangeColor(Color.red);
+            return false;
+        }
+
+        lastAttackTime = currentTime;
+    }
+
     void ChangeColor(Color newColor)
     {
         if (enemyRenderer != null)

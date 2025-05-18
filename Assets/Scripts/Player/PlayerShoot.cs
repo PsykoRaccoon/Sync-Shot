@@ -11,6 +11,8 @@ public class PlayerShoot : MonoBehaviour
     Vector3 direction;
     public float distance = 10f;
 
+    public List<GameObject> markedEnemies = new List<GameObject>();
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,7 +59,16 @@ public class PlayerShoot : MonoBehaviour
 
     public void Disparar()
     {
-
+        //gastar bala
+        //animacion
+        foreach (GameObject enemie in markedEnemies)
+        {
+            if (enemie.GetComponent<EnemyBehaviour>().canGetAttacked())
+            {
+                enemie.SetActive(false);
+            }
+        }
+        markedEnemies.Clear();
     }
     public void Recargar()
     {
@@ -97,14 +108,13 @@ public class PlayerShoot : MonoBehaviour
             if (hit.collider.TryGetComponent<EnemyBehaviour>(out EnemyBehaviour enBh))
             {
                 enBh.marked = true;
+                if(!markedEnemies.Contains(enBh.gameObject))
+                markedEnemies.Add(enBh.gameObject);
             }
         }
         else
         {
-            if (hit.collider.TryGetComponent<EnemyBehaviour>(out EnemyBehaviour enBh))
-            {
-                enBh.marked = false;
-            }
+
         }
     }
 
