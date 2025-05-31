@@ -133,7 +133,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BPM: 128
-  onVisible: 0
+  ticksSeconds: 2.13
+  timeBetweenAttacks: 0
+  marked: 0
+  enemyState: 0
 --- !u!114 &1157837370105109594
 MonoBehaviour:
   m_ObjectHideFlags: 0

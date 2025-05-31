@@ -5,32 +5,78 @@ using UnityEngine;
 public class EnemyBehaviour : MonoBehaviour
 {
     public float BPM;
-    private float timeBetweenAttacks;
+    public float ticksSeconds;
+    public float timeBetweenAttacks;
     private float lastAttackTime;
     private Color originalColor;
     private Renderer enemyRenderer;
     public bool marked = false;
+    public enum EnemyState
+    {
+        Early,
+        Perfect,
+        Late,
+        Bad
+    }
+    public EnemyState enemyState;
 
     private void Start()
     {
         enemyRenderer = GetComponent<Renderer>();
         timeBetweenAttacks = 60f / BPM;
         lastAttackTime = 0f;
+        ticksSeconds = 1 / ticksSeconds;
 
         if (enemyRenderer != null)
         {
             originalColor = enemyRenderer.material.color;
         }
+        StartCoroutine(selfCountTicks());
     }
 
     private void Update()
     {
         /*if (Input.GetKeyDown(KeyCode.Mouse0))
         {
-            HandleAttack();
+            inputDetection();
         }*/
     }
 
+    public IEnumerator selfCountTicks()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(ticksSeconds);
+            enemyState = EnemyState.Perfect;
+            Invoke(nameof(StateReset), ticksSeconds/2);
+        }
+        
+    }
+    public void LateInput()
+    {
+        enemyState = EnemyState.Late;
+    }
+    public void StateReset() {
+        enemyState = EnemyState.Bad;
+    }
+    public void inputDetection()
+    {
+        switch (enemyState)
+        {
+            case EnemyState.Early:
+                Debug.Log("inputEarly");
+                break;
+            case EnemyState.Perfect:
+                Debug.Log("Perfect");
+                break;
+            case EnemyState.Late:
+                Debug.Log("Late");
+                break;
+            case EnemyState.Bad:
+                Debug.Log("InputBad");
+                break;
+        }
+    }
     private void HandleAttack()
     {
         float currentTime = Time.time;
@@ -51,6 +97,7 @@ public class EnemyBehaviour : MonoBehaviour
 
     public bool canGetAttacked()
     {
+        /*
         float currentTime = Time.time;
 
         float timeSinceLastAttack = currentTime - lastAttackTime;
@@ -66,7 +113,17 @@ public class EnemyBehaviour : MonoBehaviour
             return false;
         }
 
-        lastAttackTime = currentTime;
+        lastAttackTime = currentTime;*/
+        if (enemyState == EnemyState.Perfect)
+        {
+            ChangeColor(Color.green);
+            return true;
+        }
+        else
+        {
+            ChangeColor(Color.red);
+            return false;
+        }
     }
 
     void ChangeColor(Color newColor)
