@@ -4301,7 +4301,7 @@ GameObject:
   - component: {fileID: 1806552423}
   - component: {fileID: 1806552422}
   m_Layer: 0
-  m_Name: TickSpawner
+  m_Name: TickSpawnerLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
