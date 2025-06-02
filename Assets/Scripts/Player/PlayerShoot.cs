@@ -78,6 +78,7 @@ public class PlayerShoot : MonoBehaviour
             {
                 if (enemie.GetComponent<EnemyBehaviour>().canGetAttacked())
                 {
+                    score += 100;
                     enemie.SetActive(false);
                 }
                 else

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 5997663422095282638}
   - component: {fileID: 7275928366110794450}
   - component: {fileID: 1088824720778977038}
+  - component: {fileID: 4495912120751522760}
   m_Layer: 0
   m_Name: EnemigosRight
   m_TagString: Untagged
@@ -133,6 +134,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f166d5d51436c704eaa7a10539fe4c09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4495912120751522760
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6172172043575890243}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fffff1519e1bd249b42d23f0f41960f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &4268331823293899008
