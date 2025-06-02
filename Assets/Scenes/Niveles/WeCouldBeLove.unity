@@ -4662,6 +4662,9 @@ MonoBehaviour:
   - tickNumber: 375
     prefabs:
     - {fileID: 6172172043575890243, guid: 9b3ee3c05253e9647b1c37e59c18284a, type: 3}
+  - tickNumber: 385
+    prefabs:
+    - {fileID: 6848851014105836783, guid: 188f4c47f5325174eb7672c30a6f323d, type: 3}
 --- !u!4 &1814164574
 Transform:
   m_ObjectHideFlags: 0
