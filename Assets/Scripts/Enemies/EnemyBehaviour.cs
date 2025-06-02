@@ -51,7 +51,7 @@ public class EnemyBehaviour : MonoBehaviour
             enemyState = EnemyState.Bad;
             //Invoke(nameof(EarlyInput), ticksSeconds);
             //Invoke(nameof(LateInput), ticksSeconds / 3);
-            Invoke(nameof(StateReset), tickManager.tickInterval / 2.5f);
+            Invoke(nameof(StateReset), tickManager.tickInterval / tickManager.ElCuarentaPorcientoDelTicksPerSecond);//tickManager.ticksToCalibrate);//2.5f);
         }
         if (marked)
         {

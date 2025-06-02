@@ -6,6 +6,7 @@ public class TickManager : MonoBehaviour
 {
     public float ticksPerSecond;
     public float tickInterval;
+    public float ElCuarentaPorcientoDelTicksPerSecond;
     public int tickCount;
 
     public event Action<int> OnTick;

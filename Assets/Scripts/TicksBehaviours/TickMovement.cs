@@ -47,7 +47,7 @@ public class TickMovement : MonoBehaviour
         {
             transform.position = targetPosition.position;
             //Destroy(gameObject);
-            PlayerShoot.vida -= 10;
+            PlayerShoot.vida -= 2;
             gameObject.SetActive(false);
         }
     }

@@ -6,7 +6,8 @@ using UnityEngine;
 public class PlayerShoot : MonoBehaviour
 {
     public bool isLookingRight = true;
-
+    public GameObject canvaMuerte;
+    public AudioSource music;
     Vector3 start;
     Vector3 direction;
     public float distance = 10f;
@@ -21,6 +22,7 @@ public class PlayerShoot : MonoBehaviour
     void Awake()
     {
         vida = 100;
+        Time.timeScale = 1;
     }
     // Start is called before the first frame update
     void Start()
@@ -65,6 +67,14 @@ public class PlayerShoot : MonoBehaviour
         {
             ApuntadoRight();
         }
+        
+        if (vida <= 0)
+        {
+            canvaMuerte.SetActive(true);
+            transform.localEulerAngles = new Vector3(0, 0, 90);
+            music.Stop();
+            Time.timeScale = 0;
+        }
     }
 
     public void Disparar()
@@ -83,7 +93,7 @@ public class PlayerShoot : MonoBehaviour
                 }
                 else
                 {
-                    vida -= 10;
+                    vida -= 2;
                 }
             }
             markedEnemies.Clear();
