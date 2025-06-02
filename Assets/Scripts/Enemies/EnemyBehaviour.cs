@@ -4,15 +4,14 @@ using UnityEngine;
 
 public class EnemyBehaviour : MonoBehaviour
 {
-    public float BPM;
-    public float ticksSeconds;
-    public float timeBetweenAttacks;
+    private float timeBetweenAttacks;
     private float lastAttackTime;
     private Color originalColor;
     private Renderer enemyRenderer;
     public bool marked = false;
     private TickManager tickManager;
     private int lastTick;
+    public GameObject crosshair;
     public enum EnemyState
     {
         Early,
@@ -27,9 +26,7 @@ public class EnemyBehaviour : MonoBehaviour
         tickManager = FindObjectOfType<TickManager>();
 
         enemyRenderer = GetComponent<Renderer>();
-        timeBetweenAttacks = 60f / BPM;
         lastAttackTime = 0f;
-        ticksSeconds = 1 / ticksSeconds;
 
         if (enemyRenderer != null)
         {
@@ -54,7 +51,15 @@ public class EnemyBehaviour : MonoBehaviour
             enemyState = EnemyState.Bad;
             //Invoke(nameof(EarlyInput), ticksSeconds);
             //Invoke(nameof(LateInput), ticksSeconds / 3);
-            Invoke(nameof(StateReset), ticksSeconds / 2.5f);
+            Invoke(nameof(StateReset), tickManager.tickInterval / 2.5f);
+        }
+        if (marked)
+        {
+            crosshair.SetActive(true);
+        }
+        else
+        {
+            crosshair.SetActive(false);
         }
     }
 
@@ -143,6 +148,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
         else
         {
+            marked = false;
             ChangeColor(Color.red);
             return false;
         }

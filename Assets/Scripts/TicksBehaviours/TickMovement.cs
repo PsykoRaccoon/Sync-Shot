@@ -45,8 +45,10 @@ public class TickMovement : MonoBehaviour
 
         if (Vector3.Distance(transform.position, targetPosition.position) < 0.1f)
         {
-            transform.position = targetPosition.position; 
-            Destroy(this);
+            transform.position = targetPosition.position;
+            //Destroy(gameObject);
+            PlayerShoot.vida -= 10;
+            gameObject.SetActive(false);
         }
     }
 }

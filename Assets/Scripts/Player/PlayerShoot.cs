@@ -11,11 +11,21 @@ public class PlayerShoot : MonoBehaviour
     Vector3 direction;
     public float distance = 10f;
 
+    public int municion = 6;
+    bool recargando;
+    public float score = 0;
+    public static int vida;
+
     public List<GameObject> markedEnemies = new List<GameObject>();
 
+    void Awake()
+    {
+        vida = 100;
+    }
     // Start is called before the first frame update
     void Start()
     {
+        vida = 100;
         start = transform.position;
         direction = transform.right;
     }
@@ -61,18 +71,39 @@ public class PlayerShoot : MonoBehaviour
     {
         //gastar bala
         //animacion
-        foreach (GameObject enemie in markedEnemies)
+        if (municion > 0 && markedEnemies.Count > 0)
         {
-            if (enemie.GetComponent<EnemyBehaviour>().canGetAttacked())
+            municion--;
+            foreach (GameObject enemie in markedEnemies)
             {
-                enemie.SetActive(false);
+                if (enemie.GetComponent<EnemyBehaviour>().canGetAttacked())
+                {
+                    enemie.SetActive(false);
+                }
+                else
+                {
+                    vida -= 10;
+                }
             }
+            markedEnemies.Clear();
         }
-        markedEnemies.Clear();
+        else
+        {
+            //avisar de no municion
+        }
     }
     public void Recargar()
     {
-
+        if (!recargando)
+        {
+            StartCoroutine(nameof(ProcesoDeRecarga));
+        }
+    }
+    public IEnumerator ProcesoDeRecarga() {
+        recargando = true;
+        yield return new WaitForSeconds(1);
+        municion = 6;
+        recargando = false;
     }
     public void ApuntadoRight()
     {

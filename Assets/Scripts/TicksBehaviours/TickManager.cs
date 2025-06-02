@@ -5,7 +5,7 @@ using UnityEngine;
 public class TickManager : MonoBehaviour
 {
     public float ticksPerSecond;
-    private float tickInterval;
+    public float tickInterval;
     public int tickCount;
 
     public event Action<int> OnTick;

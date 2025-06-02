@@ -57,6 +57,6 @@ public class TickSpawner : MonoBehaviour
     void SpawnObject(GameObject prefab)
     {
         Vector3 spawnPosition = spawnPoint ? spawnPoint.position : transform.position;
-        Instantiate(prefab, spawnPosition, Quaternion.identity);
+        Instantiate(prefab, spawnPosition, transform.rotation);
     }
 }
