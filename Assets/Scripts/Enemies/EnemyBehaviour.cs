@@ -11,6 +11,8 @@ public class EnemyBehaviour : MonoBehaviour
     private Color originalColor;
     private Renderer enemyRenderer;
     public bool marked = false;
+    private TickManager tickManager;
+    private int lastTick;
     public enum EnemyState
     {
         Early,
@@ -22,6 +24,8 @@ public class EnemyBehaviour : MonoBehaviour
 
     private void Start()
     {
+        tickManager = FindObjectOfType<TickManager>();
+
         enemyRenderer = GetComponent<Renderer>();
         timeBetweenAttacks = 60f / BPM;
         lastAttackTime = 0f;
@@ -31,7 +35,11 @@ public class EnemyBehaviour : MonoBehaviour
         {
             originalColor = enemyRenderer.material.color;
         }
-        StartCoroutine(selfCountTicks());
+        //StartCoroutine(selfCountTicks());
+        if (tickManager != null)
+        {
+            lastTick = tickManager.tickCount;
+        }
     }
 
     private void Update()
@@ -40,25 +48,39 @@ public class EnemyBehaviour : MonoBehaviour
         {
             inputDetection();
         }*/
+        if (tickManager.tickCount > lastTick)
+        {
+            lastTick = tickManager.tickCount;
+            enemyState = EnemyState.Perfect;
+            //Invoke(nameof(EarlyInput), ticksSeconds);
+            //Invoke(nameof(LateInput), ticksSeconds / 3);
+            Invoke(nameof(StateReset), ticksSeconds / 3);
+        }
     }
 
-    public IEnumerator selfCountTicks()
+   /* public IEnumerator selfCountTicks()
     {
         while (true)
         {
-            yield return new WaitForSeconds(ticksSeconds);
             enemyState = EnemyState.Perfect;
+            yield return new WaitForSeconds(ticksSeconds);
             Invoke(nameof(StateReset), ticksSeconds/2);
         }
         
-    }
+    }*/
     public void LateInput()
     {
         enemyState = EnemyState.Late;
     }
-    public void StateReset() {
+    public void EarlyInput()
+    {
+        enemyState = EnemyState.Early;
+    }
+    public void StateReset()
+    {
         enemyState = EnemyState.Bad;
     }
+    /*
     public void inputDetection()
     {
         switch (enemyState)
@@ -76,7 +98,7 @@ public class EnemyBehaviour : MonoBehaviour
                 Debug.Log("InputBad");
                 break;
         }
-    }
+    }*/
     private void HandleAttack()
     {
         float currentTime = Time.time;
