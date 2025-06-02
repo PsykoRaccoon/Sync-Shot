@@ -51,10 +51,10 @@ public class EnemyBehaviour : MonoBehaviour
         if (tickManager.tickCount > lastTick)
         {
             lastTick = tickManager.tickCount;
-            enemyState = EnemyState.Perfect;
+            enemyState = EnemyState.Bad;
             //Invoke(nameof(EarlyInput), ticksSeconds);
             //Invoke(nameof(LateInput), ticksSeconds / 3);
-            Invoke(nameof(StateReset), ticksSeconds / 3);
+            Invoke(nameof(StateReset), ticksSeconds / 2.5f);
         }
     }
 
@@ -78,7 +78,7 @@ public class EnemyBehaviour : MonoBehaviour
     }
     public void StateReset()
     {
-        enemyState = EnemyState.Bad;
+        enemyState = EnemyState.Perfect;
     }
     /*
     public void inputDetection()
@@ -136,7 +136,7 @@ public class EnemyBehaviour : MonoBehaviour
         }
 
         lastAttackTime = currentTime;*/
-        if (enemyState == EnemyState.Perfect)
+        if (enemyState != EnemyState.Bad)
         {
             ChangeColor(Color.green);
             return true;
