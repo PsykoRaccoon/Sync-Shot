@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Niveles/WeCouldBeLove.unity
     guid: 308773e2b280ff2448c27b36d4830370
+  - enabled: 1
+    path: Assets/Scenes/Niveles/I won't fall apart.unity
+    guid: fff39e541bd5b934b8f2b1c41797176b
   m_configObjects: {}
