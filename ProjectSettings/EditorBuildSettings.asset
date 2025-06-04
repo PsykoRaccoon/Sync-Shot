@@ -20,7 +20,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Niveles/I won't fall apart.unity
     guid: fff39e541bd5b934b8f2b1c41797176b
-  - enabled: 1
-    path: Assets/Scenes/Niveles/APT.unity
-    guid: 8c5e57fbbb8a112448b68dc7ded9a5ed
   m_configObjects: {}
