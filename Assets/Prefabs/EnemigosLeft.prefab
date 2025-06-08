@@ -133,6 +133,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   marked: 0
   crosshair: {fileID: 2408619484827675298}
+  highlightMaterial: {fileID: 2100000, guid: 77dacb9c8b06cda4e94f2ec94c6d375b, type: 2}
+  deathParticlesPrefabs:
+  - {fileID: 104829970813648393, guid: d3015b7eea383f64d8b81f965cc466e7, type: 3}
+  - {fileID: 6813416509558619124, guid: 3b7f2c753d435d647a80f1f047a113e3, type: 3}
+  isDead: 0
   enemyState: 0
 --- !u!114 &2051730443293620719
 MonoBehaviour:

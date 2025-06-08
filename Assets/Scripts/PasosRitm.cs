@@ -16,6 +16,10 @@ public class PasosRitm : MonoBehaviour
         {
             lastTick = ticks.tickCount;
         }
+        if (pasos == null || pasos.Length == 0)
+        {
+            Debug.LogWarning("El array 'pasos' no está asignado o está vacío.", this);
+        }
     }
 
     // Update is called once per frame
@@ -24,7 +28,7 @@ public class PasosRitm : MonoBehaviour
         if (ticks.tickCount > lastTick)
         {
             lastTick = ticks.tickCount;
-            for (int i = 0; i < pasos.Length; i += 2)
+            for (int i = 0; i < pasos.Length - 1; i += 2)
             {
                 pasos[i].GetComponent<Renderer>().material.color = color1;
                 pasos[i + 1].GetComponent<Renderer>().material.color = color2;

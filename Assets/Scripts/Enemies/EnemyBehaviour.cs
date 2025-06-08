@@ -12,6 +12,10 @@ public class EnemyBehaviour : MonoBehaviour
     private TickManager tickManager;
     private int lastTick;
     public GameObject crosshair;
+    public Material highlightMaterial;
+    private Material originalMaterial;
+    public GameObject[] deathParticlesPrefabs; // asignar en el editor
+    public bool isDead = false;
     public enum EnemyState
     {
         Early,
@@ -24,8 +28,14 @@ public class EnemyBehaviour : MonoBehaviour
     private void Start()
     {
         tickManager = FindObjectOfType<TickManager>();
-
+        
         enemyRenderer = GetComponent<Renderer>();
+        originalMaterial = enemyRenderer.material;
+        if (enemyRenderer != null)
+        {
+            originalMaterial = enemyRenderer.material;
+            originalColor = enemyRenderer.material.color;
+        }
         lastAttackTime = 0f;
 
         if (enemyRenderer != null)
@@ -53,13 +63,22 @@ public class EnemyBehaviour : MonoBehaviour
             //Invoke(nameof(LateInput), ticksSeconds / 3);
             Invoke(nameof(StateReset), tickManager.tickInterval / tickManager.ElCuarentaPorcientoDelTicksPerSecond);//tickManager.ticksToCalibrate);//2.5f);
         }
-        if (marked)
+        if (marked && !isDead)
         {
             crosshair.SetActive(true);
+            if (enemyRenderer != null && enemyRenderer.material != highlightMaterial)
+            {
+                enemyRenderer.material = highlightMaterial;
+            }
+
         }
         else
         {
             crosshair.SetActive(false);
+            if (enemyRenderer != null && enemyRenderer.material != originalMaterial)
+            {
+                enemyRenderer.material = originalMaterial;
+            }
         }
     }
 
@@ -152,14 +171,21 @@ public class EnemyBehaviour : MonoBehaviour
             ChangeColor(Color.red);
             return false;
         }
+
     }
 
     void ChangeColor(Color newColor)
     {
         if (enemyRenderer != null)
         {
-            enemyRenderer.GetComponent<Renderer>().material.color = newColor;
-            Invoke("ResetColor", 0.2f);
+            //enemyRenderer.GetComponent<Renderer>().material.color = newColor;
+            //Invoke("ResetColor", 0.2f);
+            Material instanceMaterial = new Material(enemyRenderer.material);
+            instanceMaterial.color = newColor;
+            enemyRenderer.material = instanceMaterial;
+
+            CancelInvoke(nameof(ResetColor));
+            Invoke(nameof(ResetColor), 0.2f);
         }
     }
 
@@ -167,7 +193,47 @@ public class EnemyBehaviour : MonoBehaviour
     {
         if (enemyRenderer != null)
         {
-            enemyRenderer.GetComponent<Renderer>().material.color = originalColor;
+            // enemyRenderer.GetComponent<Renderer>().material.color = originalColor;
+            // enemyRenderer.material = marked ? highlightMaterial : originalMaterial;
+            if (marked && highlightMaterial != null)
+            {
+                //    enemyRenderer.material = highlightMaterial;
+                //    enemyRenderer.material.color = Color.white;
+                Material highlightInstance = new Material(highlightMaterial);
+                highlightInstance.color = Color.white;
+                enemyRenderer.material = highlightInstance;
+            }
+            else
+            {
+                Material originalInstance = new Material(originalMaterial);
+                originalInstance.color = originalColor;
+                enemyRenderer.material = originalInstance;
+                //    enemyRenderer.material = originalMaterial;
+                //    enemyRenderer.material.color = originalColor;
+            }
         }
+    }
+
+    public void Die()
+    {
+        if (isDead) return;
+        isDead = true;
+
+        marked = false;
+        if (crosshair != null)
+            crosshair.SetActive(false);
+
+        // Instanciar el efecto de partículas
+        if (deathParticlesPrefabs != null && deathParticlesPrefabs.Length > 0)
+        {
+            int randomIndex = Random.Range(0, deathParticlesPrefabs.Length);
+            GameObject selectedPrefab = deathParticlesPrefabs[randomIndex];
+            GameObject effect = Instantiate(selectedPrefab, transform.position, Quaternion.identity);
+            Destroy(effect, 2f); // limpiar efecto
+        }
+
+        // Desactivar o destruir el enemigo
+        gameObject.SetActive(false); // o bien:
+        
     }
 }

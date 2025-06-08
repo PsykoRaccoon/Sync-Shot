@@ -7010,7 +7010,7 @@ GameObject:
   - component: {fileID: 1097705507}
   - component: {fileID: 1097705506}
   m_Layer: 5
-  m_Name: Image
+  m_Name: PantallaNegra
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
